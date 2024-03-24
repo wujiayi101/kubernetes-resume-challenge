@@ -11,4 +11,5 @@ on:
 
 jobs:
   semver:
-    uses: wujiayi101/reusable-workflows/.github/workflows/auto-semver.yml@v1.4.0
+    uses: wujiayi101/reusable-workflows/.github/workflows/auto-semver.yml@v1.4.1
+
