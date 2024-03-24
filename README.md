@@ -15,14 +15,6 @@ Devcontainer allows you to develop in an isolated container with all required so
 1. Start terminal in vscode before you run the subsequent steps
 </details>
 
-
-
-# Install sealed-secrets
-
-```
-
-```
-
 # Create sealed-secrets
 
 ```
