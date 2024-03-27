@@ -24,7 +24,8 @@ spec:
           - name: script-volume
             mountPath: /docker-entrypoint-initdb.d/create-db.sql
             subPath: create-db.sql
-        
+          - name: mysql-storage
+            mountPath: /var/lib/mysql
         envFrom:
           - secretRef:
               name: db-secrets
@@ -32,3 +33,6 @@ spec:
         - name: script-volume
           configMap:
             name: db-init-cm
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-data-pvc
