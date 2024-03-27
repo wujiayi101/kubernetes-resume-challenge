@@ -1,0 +1,30 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'kube/**'
+
+env:
+  CLUSTER_ID: lke165060-240948-09e8e5020000
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install the Linode CLI
+        uses: linode/action-linode-cli@v1
+        with:
+          api-token: ${{ secrets.LINODE_TOKEN }}
+
+      - name: Deploy to Linode Kubernetes
+        run: |
+          linode-cli k8s cluster kubeconfig view --cluster-id ${{ env.CLUSTER_ID }} > kubeconfig.yaml
+          export KUBECONFIG=$PWD/kubeconfig.yaml
+          kubectl apply -f kube/
