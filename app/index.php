@@ -20,6 +20,18 @@
         <link rel="stylesheet" href="vendors/owl_carousel/owl.carousel.css">
 
         <!-- Theme style CSS -->
+        
+        <?php
+        // Check if the environmental variable FEATURE_DARK_MODE is set and is true
+            if (getenv('FEATURE_DARK_MODE') === 'true') {
+                // If FEATURE_DARK_MODE is true, include the dark mode stylesheet
+                echo '<link rel="stylesheet" href="css/dark-mode.css">';
+            } else {
+                // If FEATURE_DARK_MODE is not true (false or unset), include the regular stylesheet
+                echo '<link rel="stylesheet" href="css/style.css">';
+            }
+        ?>
+
         <link href="css/style.css" rel="stylesheet">
 <!--        <link href="css/responsive.css" rel="stylesheet">  -->
 
@@ -180,5 +192,7 @@
         <script src="vendors/owl_carousel/owl.carousel.min.js"></script>
         <!-- Theme js -->
         <script src="js/theme.js"></script>
+        <!-- DarkMode js -->            
+        <script src="js/script.js"></script>
     </body>
 </html>
