@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - '*'
+    paths:
+      - 'app/**'
+    
 
 env:
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}

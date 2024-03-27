@@ -7,24 +7,21 @@ on:
     paths:
       - 'kube/**'
 
-env:
-  CLUSTER_ID: lke165060-240948-09e8e5020000
-
 jobs:
-  deploy:
+  deploy-to-k8s:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install the Linode CLI
-        uses: linode/action-linode-cli@v1
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Set Kubernetes Context
+        uses: azure/k8s-set-context@v4
         with:
-          api-token: ${{ secrets.LINODE_TOKEN }}
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Deploy to Linode Kubernetes
-        run: |
-          linode-cli k8s cluster kubeconfig view --cluster-id ${{ env.CLUSTER_ID }} > kubeconfig.yaml
-          export KUBECONFIG=$PWD/kubeconfig.yaml
-          kubectl apply -f kube/
+      - name: Deploy to Cluster
+        run: kubectl apply -f kube/
